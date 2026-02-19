@@ -170,7 +170,7 @@ class _LivePMChartState extends State<LivePMChart> {
         ),
 
         Text(
-          'Average PM2.5: ${average.toStringAsFixed(2)}',
+          'Average PM2.5 (in $size seconds): ${average.toStringAsFixed(2)}',
           style: const TextStyle(fontSize: 22),
         ),
       ],

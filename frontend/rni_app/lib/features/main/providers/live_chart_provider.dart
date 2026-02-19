@@ -59,10 +59,10 @@ class ChartProvider with ChangeNotifier {
   void togglePauseChart() {
     if (_chartOn == true) {
       _chartOn = false;
+      notifyListeners();
     } else {
       reset();
     }
-    notifyListeners();
   }
 
   void reset() {
@@ -70,5 +70,6 @@ class ChartProvider with ChangeNotifier {
     _average = 0;
     _max = 0;
     _chartOn = true;
+    notifyListeners();
   }
 }

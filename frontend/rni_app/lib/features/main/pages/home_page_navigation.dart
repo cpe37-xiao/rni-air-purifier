@@ -34,7 +34,8 @@ class _HomePageState extends State<HomePage> {
           SafeArea(
             child: NavigationRail(
               minWidth: 100,
-              extended: false, //Turn on if you want wider rail
+              extended:
+                  false, //Turn on if you want an expandable Navigation Rail
               destinations: [
                 NavigationRailDestination(
                   icon: Icon(Icons.home),
