@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:rni_app/features/main/pages/bluetooth_settings_page.dart';
+import 'package:rni_app/features/bluetooth/pages/bluetooth_settings_page.dart';
 import 'package:rni_app/features/main/pages/settings_page.dart';
 import 'home_page.dart';
 
