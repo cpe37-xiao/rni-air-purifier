@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
+import 'package:provider/provider.dart';
+import 'package:rni_app/features/bluetooth/providers/bluetooth_provider.dart';
+import 'package:rni_app/features/bluetooth/widgets/connected_device_screen.dart';
 
-class DeviceItem extends StatelessWidget {
+class DeviceItem extends StatefulWidget {
   const DeviceItem({
     super.key,
     required this.name,
@@ -14,20 +17,58 @@ class DeviceItem extends StatelessWidget {
   final int rssi;
 
   @override
+  State<DeviceItem> createState() => _DeviceItemState();
+}
+
+class _DeviceItemState extends State<DeviceItem> {
+  bool _isConnecting = false;
+
+  @override
   Widget build(BuildContext context) {
     return Card(
       margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
       child: ListTile(
-        onTap: () {
-          //TODO: Connect to device via device.connect()
-          device.connect(license: License.free);
-        },
-        leading: const Icon(Icons.bluetooth, color: Colors.blue),
-        title: Text(name),
+        onTap: _isConnecting
+            ? null // Disable tap while connecting
+            : () async {
+                setState(() => _isConnecting = true);
+                try {
+                  await context.read<BluetoothProvider>().connectToDevice(
+                    widget.device,
+                  );
+
+                  if (context.mounted) {
+                    // Navigate to device screen after connection
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) =>
+                            ConnectedDeviceScreen(device: widget.device),
+                      ),
+                    );
+                  }
+                } catch (e) {
+                  print("Connection failed: $e");
+                } finally {
+                  if (mounted) setState(() => _isConnecting = false);
+                }
+              },
+        leading: _isConnecting
+            ? const SizedBox(
+                width: 24,
+                height: 24,
+                child: CircularProgressIndicator(strokeWidth: 2),
+              )
+            : const Icon(Icons.bluetooth, color: Colors.blue),
+        title: Text(widget.name),
         subtitle: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: [Text('ID: ${device.remoteId}'), Text('RSSI: $rssi dBm')],
+          children: [
+            Text('ID: ${widget.device.remoteId}'),
+            Text('RSSI: ${widget.rssi} dBm'),
+          ],
         ),
+        trailing: _isConnecting ? const Text("Connecting...") : null,
       ),
     );
   }

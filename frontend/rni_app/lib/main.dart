@@ -11,7 +11,11 @@ void main() {
       providers: [
         ChangeNotifierProvider(create: (_) => ThemeProvider()),
         ChangeNotifierProvider(create: (_) => ChartProvider()),
-        ChangeNotifierProvider(create: (_) => BluetoothProvider()),
+        ChangeNotifierProxyProvider<ChartProvider, BluetoothProvider>(
+          create: (context) => BluetoothProvider(context.read<ChartProvider>()),
+          update: (context, chart, previous) =>
+              previous ?? BluetoothProvider(chart),
+        ),
       ],
       child: const App(),
     ),

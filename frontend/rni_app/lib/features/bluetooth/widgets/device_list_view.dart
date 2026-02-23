@@ -43,18 +43,20 @@ class _DeviceListViewState extends State<DeviceListView> {
           );
         }
 
-        return ListView.builder(
-          itemCount: _cachedDevices.length,
-          itemBuilder: (context, index) {
-            final result = _cachedDevices[index];
-            final device = result.device;
-            final rssi = result.rssi;
-            final name = device.platformName.isNotEmpty
-                ? device.platformName
-                : 'Unknown Device';
+        return Expanded(
+          child: ListView.builder(
+            itemCount: _cachedDevices.length,
+            itemBuilder: (context, index) {
+              final result = _cachedDevices[index];
+              final device = result.device;
+              final rssi = result.rssi;
+              final name = device.platformName.isNotEmpty
+                  ? device.platformName
+                  : 'Unknown Device';
 
-            return DeviceItem(name: name, device: device, rssi: rssi);
-          },
+              return DeviceItem(name: name, device: device, rssi: rssi);
+            },
+          ),
         );
       },
     );
