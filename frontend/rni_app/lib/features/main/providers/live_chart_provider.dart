@@ -15,7 +15,7 @@ class ChartProvider with ChangeNotifier {
   double _max = 0;
   double get max => _max;
 
-  bool _chartOn = true;
+  bool _chartOn = false;
   bool get chartOn => _chartOn;
 
   /*
@@ -33,6 +33,7 @@ class ChartProvider with ChangeNotifier {
     }
     // If no data given, only shift and return
     if (newValue is! double) {
+      print("Data is not of type double:${newValue}");
       notifyListeners();
       return;
     }
@@ -58,17 +59,15 @@ class ChartProvider with ChangeNotifier {
 
   void togglePauseChart() {
     if (_chartOn == true) {
+      // Toggle the chart on
       _chartOn = false;
     } else {
-      reset();
+      // Reset the chart and start
+      _graphData.clear();
+      _average = 0;
+      _max = 0;
+      _chartOn = true;
     }
     notifyListeners();
-  }
-
-  void reset() {
-    _graphData.clear();
-    _average = 0;
-    _max = 0;
-    _chartOn = true;
   }
 }

@@ -42,4 +42,31 @@
             <data android:mimeType="text/plain"/>
         </intent>
     </queries>
+        <!-- Bluetooth Features -->
+    <!-- Bluetooth LE feature declaration -->
+    <uses-feature 
+        android:name="android.hardware.bluetooth_le" 
+        android:required="false" />
+
+    <!-- Android 12+ Bluetooth permissions -->
+    <uses-permission 
+        android:name="android.permission.BLUETOOTH_SCAN" 
+        android:usesPermissionFlags="neverForLocation" />
+    <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
+
+    <!-- Legacy permissions for Android 11 and lower -->
+    <uses-permission 
+        android:name="android.permission.BLUETOOTH" 
+        android:maxSdkVersion="30" />
+    <uses-permission 
+        android:name="android.permission.BLUETOOTH_ADMIN" 
+        android:maxSdkVersion="30" />
+    <uses-permission 
+        android:name="android.permission.ACCESS_FINE_LOCATION" 
+        android:maxSdkVersion="30" />
+
+    <!-- Legacy permissions for Android 9 and lower -->
+    <uses-permission 
+        android:name="android.permission.ACCESS_COARSE_LOCATION" 
+        android:maxSdkVersion="28" />
 </manifest>

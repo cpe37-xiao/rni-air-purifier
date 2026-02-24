@@ -25,12 +25,7 @@ class _MainPageState extends State<MainPage> {
       appBar: AppBar(
         title: Text(widget.title, style: TextStyle(letterSpacing: -1)),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [LivePMChart()],
-        ),
-      ),
+      body: Center(child: Column(children: [LivePMChart()])),
       floatingActionButton: Column(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
