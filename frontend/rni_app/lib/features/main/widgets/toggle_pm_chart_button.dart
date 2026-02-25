@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:rni_app/features/bluetooth/dialog/show_error_dialog.dart';
+import 'package:rni_app/features/main/dialog/show_error_dialog.dart';
 import 'package:rni_app/features/bluetooth/providers/bluetooth_provider.dart';
 import 'package:rni_app/features/main/providers/live_chart_provider.dart';
 

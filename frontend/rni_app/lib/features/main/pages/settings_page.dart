@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:rni_app/features/main/widgets/settings_switch.dart';
-import '../providers/theme_provider.dart';
+import 'package:rni_app/features/main/providers/theme_provider.dart';
 
 /*
 Index 3: App Settings

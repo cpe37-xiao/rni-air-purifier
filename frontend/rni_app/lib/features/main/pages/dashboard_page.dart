@@ -3,16 +3,16 @@ import 'package:rni_app/features/main/widgets/live_pm_chart.dart';
 import 'package:rni_app/features/main/widgets/toggle_pm_chart_button.dart';
 
 /*
-Index 1: Main Page
+Index 1: Dashboard Page
   Contain Graphs, Charts and device controls
 */
-class MainPage extends StatefulWidget {
-  const MainPage({super.key});
+class DashboardPage extends StatefulWidget {
+  const DashboardPage({super.key});
   @override
-  State<MainPage> createState() => _MainPageState();
+  State<DashboardPage> createState() => _DashboardPageState();
 }
 
-class _MainPageState extends State<MainPage> {
+class _DashboardPageState extends State<DashboardPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

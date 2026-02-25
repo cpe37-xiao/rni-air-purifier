@@ -4,20 +4,20 @@ import 'package:rni_app/features/bluetooth/pages/bluetooth_settings_page.dart';
 import 'package:rni_app/features/main/pages/settings_page.dart';
 import 'package:rni_app/features/main/widgets/adapter_state.dart';
 import 'package:rni_app/features/main/widgets/device_connection_state.dart';
-import 'home_page.dart';
+import 'dashboard_page.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+class SideNavigation extends StatefulWidget {
+  const SideNavigation({super.key});
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<SideNavigation> createState() => _SideNavigationState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _SideNavigationState extends State<SideNavigation> {
   int _selectedIndex = 0;
   Widget _buildPage(int index) {
     switch (_selectedIndex) {
       case 0:
-        return MainPage();
+        return DashboardPage();
       case 1:
         return BluetoothSettingsPage();
       case 2:
