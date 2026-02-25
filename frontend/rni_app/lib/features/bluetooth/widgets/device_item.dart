@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 import 'package:provider/provider.dart';
 import 'package:rni_app/features/bluetooth/providers/bluetooth_provider.dart';
-import 'package:rni_app/features/bluetooth/widgets/connected_device_screen.dart';
+import 'package:rni_app/features/bluetooth/pages/connected_device_page.dart';
 
 class DeviceItem extends StatefulWidget {
   const DeviceItem({

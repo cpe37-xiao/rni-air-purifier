@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:rni_app/features/bluetooth/pages/bluetooth_scanning_page.dart';
 import 'package:rni_app/features/bluetooth/providers/bluetooth_provider.dart';
-import 'package:rni_app/features/bluetooth/widgets/connected_device_screen.dart';
+import 'package:rni_app/features/bluetooth/pages/connected_device_page.dart';
 
 /*
 Index 2: Bluetooth Settings
