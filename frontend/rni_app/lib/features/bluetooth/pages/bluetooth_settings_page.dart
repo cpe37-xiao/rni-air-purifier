@@ -33,7 +33,7 @@ class _BluetoothSettingsPageState extends State<BluetoothSettingsPage> {
     return Consumer<BluetoothProvider>(
       builder: (context, bluetooth, child) {
         return bluetooth.deviceIsConnected()
-            ? ConnectedDeviceScreen(device: bluetooth.connectedDevice!)
+            ? ConnectedDevicePage(device: bluetooth.connectedDevice!)
             : const BluetoothScanningPage();
       },
     );

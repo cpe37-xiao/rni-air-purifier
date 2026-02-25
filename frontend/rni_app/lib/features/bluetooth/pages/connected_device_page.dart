@@ -4,8 +4,8 @@ import 'package:provider/provider.dart';
 import 'package:rni_app/features/bluetooth/providers/bluetooth_provider.dart';
 import 'package:rni_app/features/bluetooth/widgets/connected_device_print_screen.dart';
 
-class ConnectedDeviceScreen extends StatelessWidget {
-  const ConnectedDeviceScreen({super.key, required this.device});
+class ConnectedDevicePage extends StatelessWidget {
+  const ConnectedDevicePage({super.key, required this.device});
   final BluetoothDevice device;
 
   @override

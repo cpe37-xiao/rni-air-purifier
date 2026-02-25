@@ -43,7 +43,7 @@ class _DeviceItemState extends State<DeviceItem> {
                       context,
                       MaterialPageRoute(
                         builder: (_) =>
-                            ConnectedDeviceScreen(device: widget.device),
+                            ConnectedDevicePage(device: widget.device),
                       ),
                     );
                   }
