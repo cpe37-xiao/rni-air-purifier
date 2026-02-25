@@ -11,9 +11,8 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     final darkMode = context.watch<ThemeProvider>().darkMode;
     return MaterialApp(
-      title: 'Rni Air Purifier',
       theme: darkMode ? darkTheme : lightTheme,
-      home: const HomePage(title: 'Rni Air Purifier'),
+      home: const HomePage(),
     );
   }
 }

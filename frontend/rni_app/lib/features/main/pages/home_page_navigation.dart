@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:rni_app/features/bluetooth/pages/bluetooth_settings_page.dart';
 import 'package:rni_app/features/main/pages/settings_page.dart';
+import 'package:rni_app/features/main/widgets/adapter_state.dart';
+import 'package:rni_app/features/main/widgets/device_connection_state.dart';
 import 'home_page.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({super.key, required this.title});
-
-  final String title;
+  const HomePage({super.key});
   @override
   State<HomePage> createState() => _HomePageState();
 }
@@ -17,7 +17,7 @@ class _HomePageState extends State<HomePage> {
   Widget _buildPage(int index) {
     switch (_selectedIndex) {
       case 0:
-        return MainPage(title: widget.title);
+        return MainPage();
       case 1:
         return BluetoothSettingsPage();
       case 2:
@@ -30,7 +30,20 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(widget.title)),
+      appBar: AppBar(
+        title: Row(
+          children: [
+            Text(
+              "Rni Air Purifier",
+              style: TextStyle(letterSpacing: -1, fontSize: 24),
+            ),
+            const Expanded(child: SizedBox()), // Gap to the end of Appbar
+            DeviceAdapterState(),
+            Gap(15),
+            DeviceConnectionState(),
+          ],
+        ),
+      ),
       drawer: NavigationDrawer(
         selectedIndex: _selectedIndex,
         onDestinationSelected: (int index) {

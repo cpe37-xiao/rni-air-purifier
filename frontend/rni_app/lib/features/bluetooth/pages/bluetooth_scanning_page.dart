@@ -13,7 +13,13 @@ class BluetoothScanningPage extends StatelessWidget {
     final bluetooth = context.watch<BluetoothProvider>();
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Bluetooth Scanner'), elevation: 0),
+      appBar: AppBar(
+        title: const Text(
+          'Bluetooth Scanner',
+          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+        ),
+        elevation: 0,
+      ),
       body: Column(
         children: [
           Padding(

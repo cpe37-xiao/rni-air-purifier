@@ -32,7 +32,7 @@ class _TogglePMChartButtonState extends State<TogglePMChartButton> {
         }
       },
       tooltip: 'Chart Toggle',
-      child: context.read<ChartProvider>().chartOn
+      child: context.watch<ChartProvider>().chartOn
           ? Icon(Icons.stop)
           : Icon(Icons.play_arrow),
     );
