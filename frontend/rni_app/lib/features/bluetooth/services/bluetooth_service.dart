@@ -126,7 +126,7 @@ class BlueService {
       _txCharacteristic = null;
       _rxCharacteristic = null;
 
-      List<BluetoothService> services = await device.discoverServices();
+      final List<BluetoothService> services = await device.discoverServices();
       print("Found ${services.length} services");
 
       for (BluetoothService service in services) {

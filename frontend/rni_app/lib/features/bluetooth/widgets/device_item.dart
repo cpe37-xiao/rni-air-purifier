@@ -39,7 +39,7 @@ class _DeviceItemState extends State<DeviceItem> {
 
                   if (context.mounted) {
                     // Navigate to device screen after connection
-                    Navigator.push(
+                    await Navigator.push(
                       context,
                       MaterialPageRoute(
                         builder: (_) =>
