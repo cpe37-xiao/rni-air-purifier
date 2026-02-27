@@ -2,6 +2,7 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:provider/provider.dart';
+import 'package:rni_app/features/bluetooth/providers/bluetooth_provider.dart';
 import 'package:rni_app/features/main/providers/live_chart_provider.dart';
 
 /*
@@ -26,7 +27,8 @@ class _LivePMChartState extends State<LivePMChart> {
         final average = chartProvider.average;
         final size = chartProvider.size;
         final chartOn = chartProvider.chartOn;
-
+        final online =
+            chartOn && context.watch<BluetoothProvider>().deviceIsConnected();
         return SizedBox(
           height: 280,
           width: 800,
@@ -48,9 +50,9 @@ class _LivePMChartState extends State<LivePMChart> {
                             textAlign: TextAlign.center,
                           ),
                           Text(
-                            chartOn ? "ON" : "OFF",
+                            online ? "ON" : "OFF",
                             style: TextStyle(
-                              color: chartOn ? Colors.green : Colors.red,
+                              color: online ? Colors.green : Colors.red,
                               fontWeight: FontWeight.bold,
                               fontSize: 24,
                             ),
