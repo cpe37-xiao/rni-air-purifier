@@ -25,7 +25,7 @@ class _LivePMChartState extends State<LivePMChart> {
         final maxY = (chartProvider.max <= 0 ? 1 : chartProvider.max * 1.1)
             .ceilToDouble(); //Dynamic chart height
         final average = chartProvider.average;
-        final size = chartProvider.size;
+        final size = chartProvider.timeStep;
         final chartOn = chartProvider.chartOn;
         final online =
             chartOn && context.watch<BluetoothProvider>().deviceIsConnected();
@@ -64,7 +64,7 @@ class _LivePMChartState extends State<LivePMChart> {
                       child: _buildChart(
                         graphData: graphData,
                         maxY: maxY,
-                        size: size,
+                        timeStep: size,
                         average: average,
                       ),
                     ),
@@ -82,7 +82,7 @@ class _LivePMChartState extends State<LivePMChart> {
   Widget _buildChart({
     required List<FlSpot> graphData,
     required double maxY,
-    required double size,
+    required double timeStep,
     required double average,
   }) {
     // If no data yet, show placeholder (Not ready to render)
@@ -127,27 +127,30 @@ class _LivePMChartState extends State<LivePMChart> {
                   sideTitles: SideTitles(
                     showTitles: true,
                     interval: maxY / 5,
-                    reservedSize: 40,
+                    reservedSize: 50,
+                    getTitlesWidget: (value, meta) {
+                      return TitleText(value: value);
+                    },
                   ),
                 ),
 
                 // X AXIS
-                bottomTitles: const AxisTitles(
+                bottomTitles: AxisTitles(
                   sideTitleAlignment: SideTitleAlignment.outside,
-                  axisNameWidget: Text(
-                    'Time (seconds)',
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                  ),
+                  axisNameWidget: const Text('Time (seconds)'),
                   axisNameSize: 30,
                   sideTitles: SideTitles(
                     showTitles: true,
-                    interval: 1,
+                    interval: (timeStep / 10).roundToDouble(),
                     reservedSize: 30,
+                    getTitlesWidget: (value, meta) {
+                      return TitleText(value: value);
+                    },
                   ),
                 ),
               ),
 
-              minX: -size,
+              minX: -timeStep,
               maxX: 3,
               minY: 0,
               maxY: maxY,
@@ -156,7 +159,7 @@ class _LivePMChartState extends State<LivePMChart> {
                 show: true,
                 drawVerticalLine: true,
                 horizontalInterval: maxY / 5,
-                verticalInterval: 1,
+                verticalInterval: timeStep / 5,
               ),
 
               lineBarsData: [
@@ -165,17 +168,39 @@ class _LivePMChartState extends State<LivePMChart> {
                   spots: graphData,
                   barWidth: 2,
                   isStrokeCapRound: true,
+                  dotData: context.read<ChartProvider>().showDot
+                      ? const FlDotData(show: true)
+                      : const FlDotData(show: false),
                 ),
               ],
             ),
           ),
         ),
-
-        Text(
-          'Average PM2.5 (in $size seconds): ${average.toStringAsFixed(2)}',
-          style: const TextStyle(fontSize: 22),
+        const Gap(15),
+        Row(
+          children: [
+            Text(
+              'Average PM2.5 (in $timeStep seconds): ',
+              style: const TextStyle(fontSize: 16),
+            ),
+            Text(
+              average.toStringAsFixed(2),
+              style: const TextStyle(fontSize: 18, color: Colors.blue),
+            ),
+          ],
         ),
       ],
     );
+  }
+}
+
+class TitleText extends StatelessWidget {
+  final double value;
+
+  const TitleText({super.key, required this.value});
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(value.toStringAsFixed(0), style: const TextStyle(fontSize: 14));
   }
 }
