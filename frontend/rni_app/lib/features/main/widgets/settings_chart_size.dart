@@ -23,6 +23,7 @@ class _InputFormState extends State<InputForm> {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   String? forceErrorText;
   bool isLoading = false;
+  bool isSuccess = false;
 
   @override
   void dispose() {
@@ -30,6 +31,7 @@ class _InputFormState extends State<InputForm> {
     super.dispose();
   }
 
+  // Validate the input value is a positive double and not empty.
   String? validator(String? value) {
     if (value == null || value.isEmpty) {
       return 'This field is required';
@@ -44,6 +46,7 @@ class _InputFormState extends State<InputForm> {
     return null;
   }
 
+  // Clear error state when the input changes.
   void onChanged(String value) {
     // Nullify forceErrorText if the input changed.
     if (forceErrorText != null || isSuccess) {
@@ -54,6 +57,7 @@ class _InputFormState extends State<InputForm> {
     }
   }
 
+  // Save the input value to the provider if it's valid, and show a success indicator.
   Future<void> onSave() async {
     // Providing a default value in case this was called on the
     // first frame, the [fromKey.currentState] will be null.
@@ -65,10 +69,11 @@ class _InputFormState extends State<InputForm> {
     context.read<ChartProvider>().changeChartTime(
       double.parse(controller.text),
     );
-    await notifySuccess();
+    await displaySuccessIcon();
   }
 
-  Future<void> notifySuccess() async {
+  // Show a success indicator for 1.5 seconds after saving the value.
+  Future<void> displaySuccessIcon() async {
     // Notify that the operation is completed for 1.5 seconds
     setState(() {
       isSuccess = true;
@@ -82,7 +87,6 @@ class _InputFormState extends State<InputForm> {
     });
   }
 
-  bool isSuccess = false;
   @override
   Widget build(BuildContext context) {
     return Expanded(
