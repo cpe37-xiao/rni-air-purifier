@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:rni_app/features/bluetooth/providers/bluetooth_provider.dart';
 import 'package:rni_app/features/bluetooth/widgets/sendDatabutton.dart';
+import 'package:rni_app/features/main/pages/live_sensor_summary.dart';
 import 'package:rni_app/features/main/widgets/live_pm_chart.dart';
 import 'package:rni_app/features/main/widgets/toggle_pm_chart_button.dart';
 
@@ -30,6 +31,7 @@ class _DashboardPageState extends State<DashboardPage> {
         child: Column(
           children: [
             const LivePMChart(),
+            const LiveSensorSummary(),
             context.watch<BluetoothProvider>().deviceIsConnected()
                 ? const SendDataButton(
                     message: "Fan toggle",
