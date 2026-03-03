@@ -29,7 +29,11 @@ class _LivePMChartState extends State<LivePMChart> {
         final chartOn = chartProvider.chartOn;
         final online =
             chartOn && context.watch<BluetoothProvider>().deviceIsConnected();
-        return SizedBox(
+        return Container(
+          decoration: BoxDecoration(
+            border: Border.all(color: Colors.blue, width: 1.5),
+            borderRadius: BorderRadius.circular(12),
+          ),
           height: 280,
           width: 800,
           child: Row(
@@ -71,7 +75,7 @@ class _LivePMChartState extends State<LivePMChart> {
                   ],
                 ),
               ),
-              const Gap(30),
+              const Gap(15),
             ],
           ),
         );
@@ -176,7 +180,7 @@ class _LivePMChartState extends State<LivePMChart> {
             ),
           ),
         ),
-        const Gap(15),
+        const Gap(2),
         Row(
           children: [
             Text(
@@ -189,6 +193,7 @@ class _LivePMChartState extends State<LivePMChart> {
             ),
           ],
         ),
+        const Gap(6),
       ],
     );
   }

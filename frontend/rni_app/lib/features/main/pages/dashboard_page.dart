@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:rni_app/features/bluetooth/providers/bluetooth_provider.dart';
 import 'package:rni_app/features/bluetooth/widgets/sendDatabutton.dart';
 import 'package:rni_app/features/main/pages/live_sensor_summary.dart';
 import 'package:rni_app/features/main/widgets/live_pm_chart.dart';
@@ -27,16 +25,18 @@ class _DashboardPageState extends State<DashboardPage> {
         ),
         elevation: 0,
       ),
-      body: Center(
+      body: const Center(
         child: Column(
           children: [
-            const LivePMChart(),
-            const LiveSensorSummary(),
-            context.watch<BluetoothProvider>().deviceIsConnected()
-                ? const SendDataButton(
-                    message: "Fan toggle",
-                  ) // TODO: sync fan status and change the widget from Button to Switch
-                : const SizedBox.shrink(), // Show nada
+            Padding(
+              padding: EdgeInsets.fromLTRB(2, 2, 4, 18),
+              child: LivePMChart(),
+            ),
+            LiveSensorSummary(),
+            Padding(
+              padding: EdgeInsets.all(12.0),
+              child: SendDataButton(message: "Fan toggle"),
+            ), // TODO: sync fan status and change the widget from Button to Switch// Show nada
           ],
         ),
       ),
