@@ -61,10 +61,10 @@ class BlueService {
 
   //TODO: remove Hardcode UUID (Maybe not yes)
   String serviceUUID = "6e400001-b5a3-f393-e0a9-e50e24dcca9e";
-  String dustTxUUID = "6e400003-b5a3-f393-e0a9-e50e24dcca9e"; // Dust Sensor
-  String tempTxUUID = "6E400004-B5A3-F393-E0A9-E50E24DCCA9E"; // Temp Sensor
-  String humTxUUID = "6E400005-B5A3-F393-E0A9-E50E24DCCA9E"; // Humidity Sensor
   String rxUUID = "6e400002-b5a3-f393-e0a9-e50e24dcca9e";
+  String dustTxUUID = "6e400003-b5a3-f393-e0a9-e50e24dcca9e"; // Dust Sensor
+  String tempTxUUID = "6e400004-b5a3-f393-e0a9-e50e24dcca9e"; // Temp Sensor
+  String humTxUUID = "6e400005-b5a3-f393-e0a9-e50e24dcca9e"; // Humidity Sensor
 
   Stream<String>? listenToDust() => _createStream(_dustCharacteristic);
   Stream<String>? listenToTemp() => _createStream(_tempCharacteristic);
