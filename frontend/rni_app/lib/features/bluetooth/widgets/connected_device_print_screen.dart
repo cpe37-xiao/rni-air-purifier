@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:rni_app/features/bluetooth/providers/bluetooth_provider.dart';
-import 'package:rni_app/features/bluetooth/widgets/sendDatabutton.dart';
+import 'package:rni_app/features/bluetooth/widgets/send_data_button.dart';
 
 class ConnectedDevicePrintScreen extends StatelessWidget {
   const ConnectedDevicePrintScreen({super.key});

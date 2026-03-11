@@ -32,13 +32,13 @@ class _LivePMChartState extends State<LivePMChart> {
         return Container(
           decoration: BoxDecoration(
             border: Border.all(color: Colors.blue, width: 1.5),
-            borderRadius: BorderRadius.circular(12),
+            borderRadius: BorderRadius.circular(8),
           ),
-          height: 280,
+          height: 220,
           width: 800,
           child: Row(
             children: [
-              const Gap(15),
+              const Gap(10),
               Expanded(
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
@@ -50,7 +50,7 @@ class _LivePMChartState extends State<LivePMChart> {
                         children: [
                           const Text(
                             'Status: ',
-                            style: TextStyle(fontSize: 24),
+                            style: TextStyle(fontSize: 16),
                             textAlign: TextAlign.center,
                           ),
                           Text(
@@ -58,7 +58,7 @@ class _LivePMChartState extends State<LivePMChart> {
                             style: TextStyle(
                               color: online ? Colors.green : Colors.red,
                               fontWeight: FontWeight.bold,
-                              fontSize: 24,
+                              fontSize: 20,
                             ),
                           ),
                         ],
@@ -75,7 +75,7 @@ class _LivePMChartState extends State<LivePMChart> {
                   ],
                 ),
               ),
-              const Gap(15),
+              const Gap(10),
             ],
           ),
         );
@@ -127,11 +127,11 @@ class _LivePMChartState extends State<LivePMChart> {
                 // Y AXIS
                 leftTitles: AxisTitles(
                   axisNameWidget: const Text('Dust (µg/m³)'),
-                  axisNameSize: 30,
+                  axisNameSize: 20,
                   sideTitles: SideTitles(
                     showTitles: true,
                     interval: maxY / 5,
-                    reservedSize: 50,
+                    reservedSize: 30,
                     getTitlesWidget: (value, meta) {
                       return TitleText(value: value);
                     },
@@ -142,11 +142,11 @@ class _LivePMChartState extends State<LivePMChart> {
                 bottomTitles: AxisTitles(
                   sideTitleAlignment: SideTitleAlignment.outside,
                   axisNameWidget: const Text('Time (seconds)'),
-                  axisNameSize: 30,
+                  axisNameSize: 20,
                   sideTitles: SideTitles(
                     showTitles: true,
                     interval: (timeStep / 10).roundToDouble(),
-                    reservedSize: 30,
+                    reservedSize: 18,
                     getTitlesWidget: (value, meta) {
                       return TitleText(value: value);
                     },
@@ -185,15 +185,15 @@ class _LivePMChartState extends State<LivePMChart> {
           children: [
             Text(
               'Average dust (in $timeStep seconds): ',
-              style: const TextStyle(fontSize: 16),
+              style: const TextStyle(fontSize: 14),
             ),
             Text(
               average.toStringAsFixed(2),
-              style: const TextStyle(fontSize: 18, color: Colors.blue),
+              style: const TextStyle(fontSize: 16, color: Colors.blue),
             ),
           ],
         ),
-        const Gap(6),
+        const Gap(4),
       ],
     );
   }

@@ -76,6 +76,7 @@ class BluetoothProvider with ChangeNotifier {
   String _dustData = "";
   String _tempData = "";
   String _humData = "";
+  bool _fanAuto = true;
 
   // Error message (For showAlert)
   String? _errorMessage;
@@ -95,6 +96,7 @@ class BluetoothProvider with ChangeNotifier {
   String get dustData => _dustData;
   String get tempData => _tempData;
   String get humData => _humData;
+  bool get fanAuto => _fanAuto;
 
   // Device state Getters
   List<ScanResult> get scanResults => _scanResults;
@@ -229,6 +231,16 @@ class BluetoothProvider with ChangeNotifier {
     } else if (response == "Fan:OFF") {
       _chartProvider.setFanState(false);
     }
+  }
+
+  void toggleFanMode() {
+    _fanAuto = !_fanAuto;
+    if (_fanAuto) {
+      _bluetoothService.sendDataWithAck("Fan Auto");
+    } else {
+      _bluetoothService.sendDataWithAck("Fan Manual");
+    }
+    notifyListeners();
   }
 
   ///------------///
