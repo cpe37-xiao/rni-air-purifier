@@ -38,6 +38,8 @@ unsigned long lastDHTSample = 0;
 float currentDust = 0;
 float currentTemp = 0;
 float currentHum = 0;
+bool fanAuto = true;
+bool fanManualOn = false;
 
 // Mutex to prevent simultaneous BLE writes from different tasks
 portMUX_TYPE bleMux = portMUX_INITIALIZER_UNLOCKED;
@@ -56,20 +58,44 @@ class MyServerCallbacks : public BLEServerCallbacks {
 class MyCallbacks : public BLECharacteristicCallbacks {
   void onWrite(BLECharacteristic *pCharacteristic) {
     String rxValue = pCharacteristic->getValue();
-    if (rxValue.length() > 0) {
-      Serial.print("Received: ");
-      Serial.println(rxValue.c_str());
+    if (rxValue.length() == 0) return;
 
-      // ตรวจสอบคำสั่งเพื่อควบคุม Relay
-      if (rxValue == "ON") {
-        turnOnRelay();
-      } else if (rxValue == "OFF") {
-        turnOffRelay();
-      } else if (rxValue == "Fan toggle") {
-        bool relayState = toggleRelay();
-        pResponseCharacteristic->setValue(relayState ? "Fan:ON" : "Fan:OFF");
-        pResponseCharacteristic->notify();
-      }
+    Serial.print("Received: ");
+    Serial.println(rxValue.c_str());
+
+    if (rxValue == "ON") {
+      turnOnRelay();
+
+    } else if (rxValue == "OFF") {
+      turnOffRelay();
+
+    } else if (rxValue == "Fan toggle") {
+      bool relayState = toggleRelay();
+      pResponseCharacteristic->setValue(relayState ? "Fan:ON" : "Fan:OFF");
+      pResponseCharacteristic->notify();
+
+    } else if (rxValue == "Fan Manual") {
+      fanAuto = false;
+      pResponseCharacteristic->setValue("Mode:Manual");
+      pResponseCharacteristic->notify();
+
+    } else if (rxValue == "Fan Auto") {
+      fanAuto = true;
+      pResponseCharacteristic->setValue("Mode:Auto");
+      pResponseCharacteristic->notify();
+
+    } else if (rxValue == "Fan Manual Off") {
+      fanManualOn = false;
+      pResponseCharacteristic->setValue("Mode:Manual On");
+      pResponseCharacteristic->notify();
+
+    } else if (rxValue == "Fan Manual On") {
+      fanManualOn = true;
+      pResponseCharacteristic->setValue("Mode:Manual Off");
+      pResponseCharacteristic->notify();
+
+    } else {
+      Serial.println("Unknown command: " + rxValue);
     }
   }
 };
@@ -161,7 +187,14 @@ void loop() {
     // currentDust = random(0,200);
 
     // ควบคุมพัดลมอัตโนมัติจากค่าฝุ่น
-    if (currentDust > 50.0) {
+    // Fan Manual
+    if ( fanAuto == false && fanManualOn == true ) {
+      turnOnRelay();
+    } else if ( fanAuto == false && fanManualOn == false ) {
+      turnOffRelay();
+    }
+    // Fan Auto
+    else if (currentDust > 50.0) {
       turnOnRelay();
     } else if (currentDust < 30.0) {
       turnOffRelay();
