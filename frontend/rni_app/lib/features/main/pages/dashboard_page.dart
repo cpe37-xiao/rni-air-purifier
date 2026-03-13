@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:rni_app/features/bluetooth/widgets/send_data_button.dart';
 import 'package:rni_app/features/main/pages/fan_mode_control.dart';
 import 'package:rni_app/features/main/widgets/live_sensor_summary.dart';
 import 'package:rni_app/features/main/widgets/live_pm_chart.dart';
@@ -34,19 +33,7 @@ class _DashboardPageState extends State<DashboardPage> {
               child: LivePMChart(),
             ),
             LiveSensorSummary(),
-            Column(
-              children: [
-                Padding(
-                  padding: EdgeInsets.all(4.0),
-                  child: SendDataButton(
-                    message: "Fan toggle",
-                    backgroundColor: Colors.blueAccent,
-                    foregroundColor: Colors.black,
-                  ),
-                ),
-                FanModeControl(),
-              ],
-            ),
+            Column(children: [FanModeControl()]),
           ],
         ),
       ),
